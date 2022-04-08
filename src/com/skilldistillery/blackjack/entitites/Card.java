@@ -1,4 +1,4 @@
-package com.skilldistillery.blackjack.cards;
+package com.skilldistillery.blackjack.entitites;
 
 public class Card {
 
