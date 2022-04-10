@@ -1,5 +1,7 @@
 package com.skilldistillery.blackjack.app;
 
+import com.skilldistillery.blackjack.entitites.Card;
+
 public class Player {
 
 	protected BlackJackHand hand = new BlackJackHand();
@@ -7,8 +9,8 @@ public class Player {
 	public Player() {
 	}
 
-	public void addCardToHand() {
-		// TODO
+	public void addCardToHand(Card c) {
+		hand.addCard(c);
 	}
 
 	public void showHand() {
@@ -16,19 +18,27 @@ public class Player {
 	}
 
 	public void foldHand() {
-		// TODO
+		hand.clearHand();
 	}
 
 	public int handValue() {
-		return 0;
+		return hand.getHandValue();
 	}
 
 	public boolean playerBust() {
-		return false;
+		return hand.handIsBust();
 	}
 
 	public boolean playerBlackJack() {
-		return false;
+		return hand.handIsBlackJack();
+	}
+	public boolean playerTwentyOne () {
+		if (hand.getHandValue() == BlackJackHand.BLACKJACK) {
+			return true;
+		} else {
+			return false;
+		}
+				
 	}
 
 }

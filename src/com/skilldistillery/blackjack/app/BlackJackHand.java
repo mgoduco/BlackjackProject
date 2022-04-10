@@ -6,6 +6,7 @@ import com.skilldistillery.blackjack.entitites.Hand;
 public class BlackJackHand extends Hand {
 
 	public static final int BLACKJACK = 21;
+	private int dealtCards = 0;
 
 	public BlackJackHand() {
 		super();
@@ -13,22 +14,24 @@ public class BlackJackHand extends Hand {
 
 	@Override
 	public int getHandValue() {
-		// TODO Auto-generated method stub
-		return 0;
+		int cardValue = 0;
+		for (Card card: super.hand) {
+			cardValue += card.getValue();
+		}
+		return cardValue;
 	}
 
 	@Override
 	public void addCard(Card card) {
-		// TODO Auto-generated method stub
 		super.addCard(card);
+		dealtCards ++;
 	}
 
-	// TODO
 	public boolean handIsBust() {
-		return false;
+		return getHandValue() > BLACKJACK;
 	}
 
 	public boolean handIsBlackJack() {
-		return false;
+		return getHandValue() == BLACKJACK;
 	}
 }

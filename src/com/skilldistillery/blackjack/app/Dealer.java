@@ -4,7 +4,7 @@ import com.skilldistillery.blackjack.entitites.Card;
 import com.skilldistillery.blackjack.entitites.Deck;
 
 public class Dealer extends Player {
-	
+
 	private Deck dealerDeck = new Deck();
 
 	public Dealer() {
@@ -16,7 +16,7 @@ public class Dealer extends Player {
 	}
 
 	public void shuffleDeck() {
-		// TODO
+		dealerDeck.shuffle();
 	}
 
 	@Override

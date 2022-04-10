@@ -1,14 +1,68 @@
 package com.skilldistillery.blackjack.app;
 
+import java.util.Scanner;
+
 public class BlackJackApp {
+	private Scanner sc = new Scanner(System.in);
+	private Player player = new Player();
+	private Dealer dealer = new Dealer();
+
 	public static void main(String[] args) {
 		BlackJackApp app = new BlackJackApp();
 		app.run();
 	}
-	
+
 	public void run() {
-		
+		boolean keepGoing = true;
+		while (keepGoing) {
+			boolean playerTurn = true;
+			boolean dealerTurn = true;
+			dealCards();
+			
+			if (!player.playerBlackJack()) {
+				while (playerTurn && !player.playerBust() && !player.playerTwentyOne()) {
+					playerTurn = playerTurn();
+				}
+			}
+			
+		}
+
 	}
+	private boolean playerTurn() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void dealCards() {
+		System.out.println("========  BLACKJACK =========");
+		int startCards = 2;
+		dealer.shuffleDeck();
+		
+		while (startCards != 0) {
+			player.addCardToHand(dealer.dealCard());
+			player.showHand();
+			dealer.addCardToHand(dealer.dealCard());
+//			dealer.showHand();
+			--startCards;
+		}
+	}
+
+//	public void startMenu() {
+//		System.out.println("========  BLACKJACK =========");
+//		System.out.println("=========  1.Play  =========");
+//		System.out.println("=========  2.Quit  =========");
+//		int option = sc.nextInt();
+//		sc.nextLine();
+//		switch (option) {
+//		case 1:
+//			run();
+//			break;
+//		case 2:
+//			System.out.println("GoodBye");
+//			System.exit(0);
+//		}
+//	}
+	
 }
 
 //Grading
