@@ -9,7 +9,7 @@ public class BlackJackApp {
 
 	public static void main(String[] args) {
 		BlackJackApp app = new BlackJackApp();
-		app.run();
+		app.startMenu();
 	}
 
 	public void run() {
@@ -18,26 +18,81 @@ public class BlackJackApp {
 			boolean playerTurn = true;
 			boolean dealerTurn = true;
 			dealCards();
-			
+
 			if (!player.playerBlackJack()) {
 				while (playerTurn && !player.playerBust() && !player.playerTwentyOne()) {
 					playerTurn = playerTurn();
 				}
+				if (player.playerBust()) {
+					handValue(player);
+					System.out.println("Player is BUST");
+				}
+				if (player.playerTwentyOne()) {
+					handValue(player);
+					System.out.println();
+				}
 			}
-			
+			if (!dealer.playerBlackJack()) {
+				while (dealerTurn && !player.playerBust() && !dealer.playerTwentyOne()) {
+					dealerTurn = dealerTurn();
+				}
+				if (dealer.playerBust()) {
+					handValue(player);
+					System.out.println("Dealer is BUST");
+				}
+			}
 		}
 
 	}
+
+	public void handValue(Player player) {
+		System.out.println("Hand Value " + player.handValue());
+		System.out.println();
+	}
+
 	private boolean playerTurn() {
-		// TODO Auto-generated method stub
-		return false;
+		String stringInput = "";
+		handValue(player);
+		System.out.println("==============================");
+		System.out.print("Would you like to hit or stay? ");
+		stringInput = sc.nextLine();
+		System.out.println();
+
+		if (stringInput.equalsIgnoreCase("hit")) {
+			player.addCardToHand(dealer.dealCard());
+			player.showHand();
+			return true;
+		} else if (stringInput.equalsIgnoreCase("Stay")) {
+			return false;
+		} else {
+			System.out.println("Invalid response");
+			return true;
+		}
+	}
+
+	private boolean dealerTurn() {
+		if (dealer.handValue() < 17) {
+			dealer.addCardToHand(dealer.dealCard());
+			dealer.showHand();
+			handValue(dealer);
+
+			if (dealer.handValue() >= 17) {
+				return false;
+			}
+			return true;
+		} else {
+			System.out.println();
+			dealer.showHand();
+			handValue(dealer);
+			return false;
+		}
 	}
 
 	public void dealCards() {
 		System.out.println("========  BLACKJACK =========");
 		int startCards = 2;
 		dealer.shuffleDeck();
-		
+
 		while (startCards != 0) {
 			player.addCardToHand(dealer.dealCard());
 			player.showHand();
@@ -47,22 +102,22 @@ public class BlackJackApp {
 		}
 	}
 
-//	public void startMenu() {
-//		System.out.println("========  BLACKJACK =========");
-//		System.out.println("=========  1.Play  =========");
-//		System.out.println("=========  2.Quit  =========");
-//		int option = sc.nextInt();
-//		sc.nextLine();
-//		switch (option) {
-//		case 1:
-//			run();
-//			break;
-//		case 2:
-//			System.out.println("GoodBye");
-//			System.exit(0);
-//		}
-//	}
-	
+	public void startMenu() {
+		System.out.println("========  BLACKJACK =========");
+		System.out.println("=========  1.Play  =========");
+		System.out.println("=========  2.Quit  =========");
+		int option = sc.nextInt();
+		sc.nextLine();
+		switch (option) {
+		case 1:
+			run();
+			break;
+		case 2:
+			System.out.println("GoodBye");
+			System.exit(0);
+		}
+	}
+
 }
 
 //Grading
