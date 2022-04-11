@@ -41,6 +41,9 @@ public class BlackJackApp {
 					System.out.println("Dealer is BUST");
 				}
 			}
+			determineWinner(); 
+				
+			
 		}
 
 	}
@@ -67,6 +70,43 @@ public class BlackJackApp {
 		} else {
 			System.out.println("Invalid response");
 			return true;
+		}
+	}
+
+	// User Story #5
+	private void determineWinner() {
+		boolean playerBlackJack = player.playerBlackJack() && !dealer.playerBlackJack();
+		boolean equalHands = player.playerBlackJack() && dealer.playerBlackJack()
+				|| player.handValue() == dealer.handValue();
+		boolean playerWin = dealer.playerBust() && !player.playerBust()
+				|| !dealer.playerBlackJack() && (player.handValue() > dealer.handValue() && !player.playerBust());
+
+		if (playerBlackJack) {
+			System.out.println("======================");
+			System.out.println("===== BLACKJACK! =====");
+			System.out.println("======================");
+			System.out.println("==== Dealer hand ===== ");
+			System.out.println("======================");
+			dealer.showHand();
+		} else if (playerWin) {
+			System.out.println("======================");
+			System.out.println("=You Beat the Dealer!=");
+			System.out.println("======================");
+		} else if (dealer.playerBlackJack()) {
+			System.out.println("======================");
+			System.out.println("=Dealer Won you Lose!=");
+			System.out.println("======================");
+		} else if (equalHands) {
+			if (player.playerBlackJack() && dealer.playerBlackJack()) {
+				System.out.println("======================");
+				System.out.println("======== Push ========");
+				System.out.println("======================");
+			}
+			System.out.println("======== Push ========");
+		} else {
+			System.out.println("======================");
+			System.out.println("=Dealer Won you Lose!=");
+			System.out.println("======================");
 		}
 	}
 
