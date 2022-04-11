@@ -6,7 +6,6 @@ import com.skilldistillery.blackjack.entitites.Hand;
 public class BlackJackHand extends Hand {
 
 	public static final int BLACKJACK = 21;
-	private int dealtCards = 0;
 
 	public BlackJackHand() {
 		super();
@@ -24,7 +23,6 @@ public class BlackJackHand extends Hand {
 	@Override
 	public void addCard(Card card) {
 		super.addCard(card);
-		dealtCards ++;
 	}
 
 	public boolean handIsBust() {

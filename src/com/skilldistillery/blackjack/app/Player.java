@@ -32,13 +32,14 @@ public class Player {
 	public boolean playerBlackJack() {
 		return hand.handIsBlackJack();
 	}
-	public boolean playerTwentyOne () {
+
+	public boolean playerTwentyOne() {
 		if (hand.getHandValue() == BlackJackHand.BLACKJACK) {
 			return true;
 		} else {
 			return false;
 		}
-				
+
 	}
 
 }
