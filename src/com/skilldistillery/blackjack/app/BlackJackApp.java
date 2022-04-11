@@ -41,9 +41,10 @@ public class BlackJackApp {
 					System.out.println("Dealer is BUST");
 				}
 			}
-			determineWinner(); 
-				
-			
+			determineWinner();
+			gameRestart();
+			startMenu();
+
 		}
 
 	}
@@ -89,24 +90,24 @@ public class BlackJackApp {
 			System.out.println("======================");
 			dealer.showHand();
 		} else if (playerWin) {
-			System.out.println("======================");
-			System.out.println("=You Beat the Dealer!=");
-			System.out.println("======================");
+			System.out.println("============================");
+			System.out.println("=== You Beat the Dealer! ===");
+			System.out.println("============================");
 		} else if (dealer.playerBlackJack()) {
-			System.out.println("======================");
-			System.out.println("=Dealer Won you Lose!=");
-			System.out.println("======================");
+			System.out.println("============================");
+			System.out.println("==== Dealer  BlackJack! ====");
+			System.out.println("============================");
 		} else if (equalHands) {
 			if (player.playerBlackJack() && dealer.playerBlackJack()) {
-				System.out.println("======================");
-				System.out.println("======== Push ========");
-				System.out.println("======================");
+				System.out.println("============================");
+				System.out.println("=========== Push ===========");
+				System.out.println("============================");
 			}
-			System.out.println("======== Push ========");
+			System.out.println("=========== Push ===========");
 		} else {
-			System.out.println("======================");
-			System.out.println("=Dealer Won you Lose!=");
-			System.out.println("======================");
+			System.out.println("============================");
+			System.out.println("=== Dealer Won you Lose! ===");
+			System.out.println("============================");
 		}
 	}
 
@@ -143,7 +144,7 @@ public class BlackJackApp {
 	}
 
 	public void startMenu() {
-		System.out.println("========  BLACKJACK =========");
+		System.out.println("========  BLACKJACK ========");
 		System.out.println("=========  1.Play  =========");
 		System.out.println("=========  2.Quit  =========");
 		int option = sc.nextInt();
@@ -152,10 +153,16 @@ public class BlackJackApp {
 		case 1:
 			run();
 			break;
+
 		case 2:
 			System.out.println("GoodBye");
 			System.exit(0);
 		}
+	}
+
+	public void gameRestart() {
+		player.foldHand();
+		dealer.foldHand();
 	}
 
 }
